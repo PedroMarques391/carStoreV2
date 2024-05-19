@@ -29,7 +29,7 @@ const Header = (): React.JSX.Element => {
 
   return (
     <header className={`${hidden ? "hidden" : "sticky top-0 left-0 right-0 z-20 bg-black h-16 drop-shadow flex items-center justify-center"} ${onScroll && "shadow-sm shadow-red-600 transition-shadow duration-500"}`}>
-      <nav className={`block sm:hidden fixed top-0 transition-all w-1/2 duration-1000 z-30 ${!isOpen ? "-right-[400px]" : "right-0"}`}>
+      <nav className={`block sm:hidden fixed top-0 transition-all w-1/2 duration-1000 z-30 ${!isOpen ? "-right-96" : "right-0"}`}>
         <Sidebar handleClick={handleClick} />
       </nav>
       <section className='flex w-full items-center justify-between max-w-7xl px-5 mx-auto'>
