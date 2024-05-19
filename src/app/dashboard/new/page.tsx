@@ -8,18 +8,22 @@ import { db, storage } from '@/data/firebase.config'
 import { useAuth } from '@/hooks/useAuth'
 import Private from '@/routes/Private'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Firestore, addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection } from 'firebase/firestore'
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import Image from 'next/image'
 import React, { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { v4 as uuidV4 } from 'uuid'
 import { z } from 'zod'
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Metadata from '@/components/Utils/Metadata'
 
 const schema = z.object({
   name: z.string().min(1, "O nome é obrigatório"),
   model: z.string().min(1, "O modelo é obrigatório"),
   year: z.string().min(1, "O ano é obrigatório"),
+  type: z.string().min(1, "O tipo do carro é obrigatório"),
   km: z.string().min(1, "A kilometragem é obrigatória"),
   price: z.string().min(1, "Informe o preço"),
   city: z.string().min(1, "A cidade é obrigatória"),
@@ -61,10 +65,11 @@ const RegisterCar = (): React.JSX.Element => {
     })
 
     addDoc(collection(db, "cars"), {
-      name: data.name,
+      name: data.name.toUpperCase(),
       model: data.model,
       year: data.year,
       km: data.km,
+      type: data.type.toLowerCase(),
       price: data.price,
       city: data.city,
       whatsApp: data.whatsApp,
@@ -74,15 +79,34 @@ const RegisterCar = (): React.JSX.Element => {
       uuid: user?.uid,
       images: carListImages
     })
-      .then((data) => {
-        console.log(data);
+      .then(() => {
+        toast.success('Veículo cadastrado com sucesso!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         reset()
         setImages([])
-        
-      })
-      .catch((error) => {
-        console.log(error);
 
+      })
+      .catch(() => {
+        toast.error('Erro ao cadastrar veículo', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       })
 
   }
@@ -92,9 +116,31 @@ const RegisterCar = (): React.JSX.Element => {
       const image = e.target.files[0]
 
       if (image.type === "image/jpeg" || image.type === "image/png") {
+        toast.success('Imagem cadastrada com sucesso.', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         return handleUpload(image)
       } else {
-        return alert("Envie uma imagem em PGN ou JPG")
+        return toast.error('Você precisa cadastrar um arquivo PNG ou JPEG.', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+
       }
     }
   }
@@ -141,8 +187,11 @@ const RegisterCar = (): React.JSX.Element => {
     <Private>
       <Container>
         <DashboardHeader />
-
+        <ToastContainer />
         <div className='w-full bg-white p-3 rounded-lg flex flex-col sm:flex-row items-center gap-2'>
+        <Metadata
+              seoTitle="carStore | Cadastrar Carro"
+              seoDescription={`carStore - Página para cadastro de veículos`} />
           <button className='border-2 w-42 rounded-lg flex items-center justify-center cursor-pointer h-32 border-gray-600 md:w-48'>
             <div className='absolute cursor-pointer'>{IconUpload}</div>
             <div className='cursor-pointer'>
@@ -155,7 +204,7 @@ const RegisterCar = (): React.JSX.Element => {
           </button>
 
           {images.map((car) => (
-            <section key={car.uid} className='h-32 w-full flex justify-center items-center relative'>
+            <section key={car.name} className='h-32 w-full flex justify-center items-center relative'>
               <button
                 onClick={() => handleDeleteImage(car)}
                 className='absolute'>{IconTrash}</button>
@@ -246,15 +295,27 @@ const RegisterCar = (): React.JSX.Element => {
               </div>
             </div>
 
-            <div className="mb-3">
-              <Label>WhatsApp</Label>
-              <Input
-                type='text'
-                register={register}
-                name="whatsApp"
-                placeholder='(91)987538433'
-                error={errors.whatsApp?.message}
-              />
+            <div className="flex w-full mb-3 gap-4">
+              <div className="w-full">
+                <Label>WhatsApp</Label>
+                <Input
+                  type='text'
+                  register={register}
+                  name="whatsApp"
+                  placeholder='(91)987538433'
+                  error={errors.whatsApp?.message}
+                />
+              </div>
+              <div className="w-full">
+                <Label>Tipo do carro</Label>
+                <Input
+                  type='text'
+                  register={register}
+                  name="type"
+                  placeholder='hatche'
+                  error={errors.type?.message}
+                />
+              </div>
             </div>
 
             <div className="mb-3">

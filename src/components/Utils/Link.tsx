@@ -7,15 +7,20 @@ interface ILinkProps {
     children: ReactNode
     className?: string
     animation?: boolean
+    target?: string
 }
 
-const Links = ({ href, children, className, animation=true }: ILinkProps): React.JSX.Element => {
+const Links = ({ href, children, className, animation=true, target="_top" }: ILinkProps): React.JSX.Element => {
     const pathName = usePathname()
     const isCurrentPath = pathName === href
 
     return (
         <div className={`${className} flex items-baseline group`}>
-            <Link href={href}>
+            <Link
+            replace
+            className='p-2'
+            target={target}
+            href={href}>
                 {children}
                 <p className={`group-hover:animate-lines mt-0.5 h-0.5 bg-red-700 ${isCurrentPath ? "w-full" : "w-0"} ${!animation && "hidden"}`} />
             </Link>

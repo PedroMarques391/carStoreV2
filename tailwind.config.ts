@@ -9,9 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "carStore": "url('/carStore.png')",
+        "carStoreMobile": "url('/carStoreMobile.png')",
+        "carStoreGarage": "url('/carStoreGarage.png')",
+        "carStoreGarageMobile": "url('/carStoreGarageMobile.png')",
+        "carStoreAbout": "url('/carStoreAbout.png')",
+        "carStoreAboutMobile": "url('/carStoreAboutMobile.png')",
       },
       keyframes: {
         line: {
@@ -34,7 +37,7 @@ const config: Config = {
       },
       animation: {
         lines: "line 2s ease-in-out forwards",
-        load: "shine 2s infinite;"
+        load: "shine 2s infinite",
       }
     },
   },

@@ -10,7 +10,7 @@ const DashboardHeader = (): React.JSX.Element => {
     }
 
     return (
-        <section className='w-full flex items-center justify-center h-12 bg-red-500 text-white gap-4 px-4 rounded-lg mb-4 text-sm sm:text-base'>
+        <section className='w-full flex items-center justify-center h-12 bg-black text-white gap-4 px-4 rounded-lg my-4 text-sm sm:text-base'>
             <Links href='/dashboard'>Dashboard</Links>
             <Links href='/dashboard/new'>Cadastrar Carro</Links>
 

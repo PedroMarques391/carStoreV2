@@ -9,13 +9,14 @@ interface IInputProps {
     register: UseFormRegister<any>
     error?: string
     rules?: RegisterOptions
+    className?: string
 }
 
-const Input = ({name, placeholder, type, register, error, rules}: IInputProps): React.JSX.Element => {
+const Input = ({name, placeholder, type, register, error, rules, className}: IInputProps): React.JSX.Element => {
   return (
     <div>
         <input 
-        className='w-full border-2 rounded-md h-11 px-2 outline-none placeholder:capitalize'
+        className={`${className} w-full border-2 rounded-md h-11 px-2 outline-none placeholder:capitalize`}
         {...register(name, rules)} 
         id={name}
         placeholder={placeholder}

@@ -2,7 +2,7 @@ import React from 'react'
 
 const CardLoading = (): React.JSX.Element => {
   return (
-    <section className='w-full bg-white rounded-lg group overflow-hidden'>
+    <section className='w-full bg-white rounded-lg group overflow-hidden mt-8'>
       <div className='w-full rounded-lg h-60 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-load' />
       <div className='bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 h-5 mt-2 w-1/2 ml-2 rounded-e-lg animate-load' />
       <div className='bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 h-5 mt-4 mb-8 w-2/3 ml-2 rounded-e-lg animate-load' />
