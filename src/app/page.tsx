@@ -42,7 +42,7 @@ const Home = (): React.JSX.Element => {
 
   return (
     <>
-      <div className='bg-carStoreMobile md:bg-carStore bg-cover w-full h-60 md:h-96' />
+      <div className='bg-carStoreMobile lg:bg-carStore bg-cover w-full h-60 md:h-96' />
       <Container>
         <SearchInput/>
 
@@ -62,8 +62,8 @@ const Home = (): React.JSX.Element => {
           </main>
         ) : (
           <>
-            <h1 className='font-bold mb-4 mt-4 sm:mt-0 text-2xl text-black/50'>Últimos Veículos Publicados</h1>
-            <main className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+            <h1 className='font-bold mb-4 mt-4 text-2xl text-black/50'>Últimos Veículos Publicados</h1>
+            <main className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>
               <CarCard cars={cars} size={6} />
             </main></>
         )}

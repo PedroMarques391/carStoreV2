@@ -11,7 +11,7 @@ const Sidebar = ({ handleClick }: ISidebarProps): React.JSX.Element => {
     const { signed, loadingAuth } = useAuth()
 
     return (
-        <aside className='flex flex-col bg-black h-screen'>
+        <aside className='flex flex-col w-full h-screen bg-black sm:hidden z-40'>
             <button
                 onClick={handleClick}
                 className='flex justify-end pt-4 pr-7'>

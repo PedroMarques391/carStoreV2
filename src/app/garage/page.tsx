@@ -29,7 +29,7 @@ const Garage = (): React.JSX.Element => {
     return (
         <>
             <Metadata seoTitle='carStore | Garagem' seoDescription='carStore - Página de estoque' />
-            <div className='bg-carStoreGarageMobile md:bg-carStoreGarage bg-cover w-full h-60 sm:h-[400px] ' />
+            <div className='bg-carStoreGarageMobile lg:bg-carStoreGarage bg-cover w-full h-60 sm:h-[400px] ' />
             <Container>
                 <section className='relative'>
                     <h1 className='my-10 text-xl sm:text-2xl font-bold text-center'>

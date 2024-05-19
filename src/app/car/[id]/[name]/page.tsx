@@ -242,7 +242,7 @@ const CarDetails = (): React.JSX.Element => {
             </section>
           )
         ) : (
-          <div className='h-screen w-full flex justify-center items-center animate-spin'>{IconLoading}</div>
+          <div className='h-screen w-full flex justify-center items-center animate-spin'>{IconLoading(24, "text-black")}</div>
         )}
       </Container>
     </>

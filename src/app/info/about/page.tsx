@@ -7,7 +7,7 @@ const About = (): React.JSX.Element => {
   return (
     <>
     <Metadata seoTitle='carStore | Sobre Nós' seoDescription='carStore - Informações sobre a carStore' />
-      <div className='bg-carStoreAboutMobile md:bg-carStoreAbout bg-cover w-full h-60 sm:h-96' />
+      <div className='bg-carStoreAboutMobile lg:bg-carStoreAbout bg-cover w-full h-60 sm:h-96' />
       <Container>
         <main className='grid grid-cols-1 md:grid-cols-2 mt-10 gap-10'>
           <section className='w-full flex flex-col gap-5'>

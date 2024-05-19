@@ -16,63 +16,69 @@ const Header = (): React.JSX.Element => {
 
   const [onScroll, setOnScroll] = useState<boolean>(false)
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setOnScroll(window.scrollY > 150)
-        }
-        return window.addEventListener("scroll", handleScroll)
-    }, [])
+  useEffect(() => {
+    const handleScroll = () => {
+      setOnScroll(window.scrollY > 150)
+    }
+    return window.addEventListener("scroll", handleScroll)
+  }, [])
 
   const handleClick = (): void => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <header className={`${hidden ? "hidden" : "sticky top-0 left-0 right-0 z-20 bg-black h-16 drop-shadow flex items-center justify-center"} ${onScroll && "shadow-sm shadow-red-600 transition-shadow duration-500"}`}>
-      <nav className={`block sm:hidden fixed top-0 transition-all w-1/2 duration-1000 z-30 ${!isOpen ? "-right-96" : "right-0"}`}>
+    <>
+      <nav className={`fixed top-0 transition-all w-1/2 duration-1000 z-30 ${!isOpen ? "-right-96" : "right-0"}`}>
         <Sidebar handleClick={handleClick} />
       </nav>
-      <section className='flex w-full items-center justify-between max-w-7xl px-5 mx-auto'>
-        <Link href={"/"}>
-          <Logo />
-        </Link>
+      <header
+        className={`
+    ${hidden && "hidden"} 
+    ${onScroll && "shadow-sm shadow-red-600 transition-shadow duration-500"} sticky top-0 right-0 z-20 bg-black h-16 drop-shadow flex items-center justify-center w-full
+    `}>
 
-        <div className='hidden sm:flex w-full justify-end gap-20 items-center'>
-          <ul className='flex justify-center items-center gap-x-10'>
-            <Links href='/' className='text-white text-lg'>
-              Início
-            </Links>
+        <section className='flex w-full items-center justify-between max-w-7xl px-5 mx-auto'>
+          <Link href={"/"}>
+            <Logo />
+          </Link>
+          <div className='hidden sm:flex w-full justify-end gap-20 items-center'>
+            <ul className='flex justify-center items-center gap-x-10'>
+              <Links href='/' className='text-white text-lg'>
+                Início
+              </Links>
 
-            <Links href='/garage' className='text-white text-lg'>
-              Garagem
-            </Links>
+              <Links href='/garage' className='text-white text-lg'>
+                Garagem
+              </Links>
 
-            <Links href='/info/about' className='text-white text-lg'>
-              Sobre
-            </Links>
-          </ul>
+              <Links href='/info/about' className='text-white text-lg'>
+                Sobre
+              </Links>
+            </ul>
 
-          {!loadingAuth && signed && (
-            <Link href={"/dashboard"}>
-              {IconUser}
-            </Link>
-          )}
+            {!loadingAuth && signed && (
+              <Link href={"/dashboard"}>
+                {IconUser}
+              </Link>
+            )}
 
-          {!loadingAuth && !signed && (
-            <Link href={"/login"}>
-              {IconLogin}
-            </Link>
-          )}
-        </div>
+            {!loadingAuth && !signed && (
+              <Link href={"/login"}>
+                {IconLogin}
+              </Link>
+            )}
+          </div>
 
-        <button
-          onClick={handleClick}
-          className='flex sm:hidden'>
-          {IconBars}
-        </button>
+          <button
+            onClick={handleClick}
+            className='flex sm:hidden'>
+            {IconBars}
+          </button>
 
-      </section>
-    </header>
+        </section>
+      </header>
+    </>
   );
 };
 
