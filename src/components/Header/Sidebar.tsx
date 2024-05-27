@@ -1,13 +1,15 @@
 import { useAuth } from '@/hooks/useAuth'
 import Links from '../Utils/Link'
-import { IconBars, IconClose, IconLogin, IconUser } from '../Utils/Icons'
+import { IconClose, IconLogin, IconUser } from '../Utils/Icons'
 import Link from 'next/link'
+import { Dispatch, SetStateAction } from 'react'
 
 interface ISidebarProps {
     handleClick: () => void
+    setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const Sidebar = ({ handleClick }: ISidebarProps): React.JSX.Element => {
+const Sidebar = ({ handleClick, setIsOpen }: ISidebarProps): React.JSX.Element => {
     const { signed, loadingAuth } = useAuth()
 
     return (
@@ -18,28 +20,35 @@ const Sidebar = ({ handleClick }: ISidebarProps): React.JSX.Element => {
                 {IconClose}
             </button>
             <ul className='flex flex-col justify-center items-center gap-y-5'>
-                <Links href='/' className='text-white text-xl w-full p-5'>
+                <Links
+                    href='/' className='text-white text-xl w-full p-5'>
                     Início
                 </Links>
 
-                <Links href='/garage' className='text-white text-xl w-full p-5'>
+                <Links 
+                href='/garage' className='text-white text-xl w-full p-5'>
                     Garagem
                 </Links>
 
-                <Links href='/info/about' className='text-white text-xl w-full p-5'>
+                <Links 
+                href='/info/about' className='text-white text-xl w-full p-5'>
                     Sobre
                 </Links>
             </ul>
 
             <div className='my-5 flex justify-start p-5 sm:justify-center sm:p-0 items-center'>
                 {!loadingAuth && signed && (
-                    <Link href={"/dashboard"}>
+                    <Link 
+                    onClick={() => setIsOpen(false)}
+                    href={"/dashboard"}>
                         {IconLogin}
                     </Link>
                 )}
 
                 {!loadingAuth && !signed && (
-                    <Link href={"/login"}>
+                    <Link 
+                    onClick={() => setIsOpen(false)}
+                    href={"/login"}>
                         {IconUser}
                     </Link>
                 )}

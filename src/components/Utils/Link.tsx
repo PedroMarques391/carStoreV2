@@ -8,15 +8,17 @@ interface ILinkProps {
     className?: string
     animation?: boolean
     target?: string
+    onClick?: () => void
 }
 
-const Links = ({ href, children, className, animation=true, target="_top" }: ILinkProps): React.JSX.Element => {
+const Links = ({ href, children, className, animation=true, target="_top", onClick }: ILinkProps): React.JSX.Element => {
     const pathName = usePathname()
     const isCurrentPath = pathName === href
 
     return (
         <div className={`${className} flex items-baseline group`}>
             <Link
+            onClick={onClick}
             replace
             className='p-2'
             target={target}

@@ -30,7 +30,7 @@ const Header = (): React.JSX.Element => {
   return (
     <>
       <nav className={`fixed top-0 transition-all w-1/2 duration-1000 z-30 ${!isOpen ? "-right-96" : "right-0"}`}>
-        <Sidebar handleClick={handleClick} />
+        <Sidebar handleClick={handleClick} setIsOpen={setIsOpen} />
       </nav>
       <header
         className={`
